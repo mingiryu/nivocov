@@ -1,24 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
+import Sunburst from './components/Sunburst'
+import Bubble from './components/Bubble'
+import Choropleth from './components/Choropleth';
 import './App.css';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <h1 className="App-title">2019-nCoV: Confirmed Cases by Country (Last Updated: Feb 6, 2020)</h1>
       </header>
+
+      <div className="Dashboard">
+        <div className="Chart" id="sunburst">
+          <Sunburst />
+        </div>
+        <div className="Chart" id="bubble">
+          <Bubble />
+        </div>
+        <div className="Chart" id="choropleth">
+          <Choropleth />
+        </div>
+      </div>
     </div>
   );
 }

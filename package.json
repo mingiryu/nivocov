@@ -3,11 +3,16 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@nivo/circle-packing": "^0.61.0",
+    "@nivo/geo": "^0.61.1",
+    "@nivo/line": "^0.61.1",
+    "@nivo/sunburst": "^0.61.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^7.2.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "react-leaflet": "^2.6.1",
     "react-scripts": "3.3.0"
   },
   "scripts": {
