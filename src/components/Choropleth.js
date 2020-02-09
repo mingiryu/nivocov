@@ -11,7 +11,8 @@ export default class Choropleth extends React.Component {
                 features={Countries.features}
                 margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
                 colors="nivo"
-                domain={[ 0, 30000 ]}
+                value="sum"
+                domain={[ 0, 35000 ]}
                 unknownColor="#666666"
                 label="properties.name"
                 valueFormat=".2s"
