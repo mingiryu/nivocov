@@ -1,7 +1,7 @@
 import * as d3 from "d3";
 import CountryLookup from './CountryLookup'
 
-const url = "https://raw.githubusercontent.com/CSSEGISandData/2019-nCoV/master/daily_case_updates/02-10-2020_1930.csv"
+const url = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/daily_case_updates/02-12-2020_2200.csv"
 
 export default function getData() {
     return d3.csv(url)

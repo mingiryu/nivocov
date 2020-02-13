@@ -4,152 +4,152 @@ export const ChoroplethData = [
   {
     "id": "CHN",
     "name": "Mainland China",
-    "sum": 42310,
+    "sum": 59805,
     "color": "hsl(209, 70%, 50%)",
     "children": [
       {
         "name": "Hubei",
-        "loc": 31728,
+        "loc": 48206,
         "color": "hsl(209, 70%, 50%)"
       },
       {
         "name": "Guangdong",
-        "loc": 1159,
-        "color": "hsl(209, 70%, 50%)"
-      },
-      {
-        "name": "Zhejiang",
-        "loc": 1092,
+        "loc": 1241,
         "color": "hsl(209, 70%, 50%)"
       },
       {
         "name": "Henan",
-        "loc": 1073,
+        "loc": 1169,
+        "color": "hsl(209, 70%, 50%)"
+      },
+      {
+        "name": "Zhejiang",
+        "loc": 1145,
         "color": "hsl(209, 70%, 50%)"
       },
       {
         "name": "Hunan",
-        "loc": 879,
+        "loc": 968,
         "color": "hsl(209, 70%, 50%)"
       },
       {
         "name": "Anhui",
-        "loc": 830,
+        "loc": 910,
         "color": "hsl(209, 70%, 50%)"
       },
       {
         "name": "Jiangxi",
-        "loc": 771,
+        "loc": 872,
         "color": "hsl(209, 70%, 50%)"
       },
       {
         "name": "Jiangsu",
-        "loc": 492,
+        "loc": 570,
         "color": "hsl(209, 70%, 50%)"
       },
       {
         "name": "Chongqing",
-        "loc": 486,
+        "loc": 518,
         "color": "hsl(209, 70%, 50%)"
       },
       {
         "name": "Shandong",
-        "loc": 466,
+        "loc": 506,
         "color": "hsl(209, 70%, 50%)"
       },
       {
         "name": "Sichuan",
-        "loc": 405,
-        "color": "hsl(209, 70%, 50%)"
-      },
-      {
-        "name": "Beijing",
-        "loc": 337,
+        "loc": 451,
         "color": "hsl(209, 70%, 50%)"
       },
       {
         "name": "Heilongjiang",
-        "loc": 331,
+        "loc": 395,
+        "color": "hsl(209, 70%, 50%)"
+      },
+      {
+        "name": "Beijing",
+        "loc": 366,
         "color": "hsl(209, 70%, 50%)"
       },
       {
         "name": "Shanghai",
-        "loc": 299,
+        "loc": 313,
         "color": "hsl(209, 70%, 50%)"
       },
       {
         "name": "Fujian",
-        "loc": 261,
+        "loc": 279,
         "color": "hsl(209, 70%, 50%)"
       },
       {
         "name": "Hebei",
-        "loc": 218,
+        "loc": 265,
         "color": "hsl(209, 70%, 50%)"
       },
       {
         "name": "Shaanxi",
-        "loc": 213,
+        "loc": 229,
         "color": "hsl(209, 70%, 50%)"
       },
       {
         "name": "Guangxi",
-        "loc": 210,
-        "color": "hsl(209, 70%, 50%)"
-      },
-      {
-        "name": "Yunnan",
-        "loc": 149,
+        "loc": 222,
         "color": "hsl(209, 70%, 50%)"
       },
       {
         "name": "Hainan",
-        "loc": 138,
+        "loc": 157,
         "color": "hsl(209, 70%, 50%)"
       },
       {
-        "name": "Shanxi",
-        "loc": 119,
+        "name": "Yunnan",
+        "loc": 155,
         "color": "hsl(209, 70%, 50%)"
       },
       {
         "name": "Guizhou",
-        "loc": 109,
+        "loc": 135,
+        "color": "hsl(209, 70%, 50%)"
+      },
+      {
+        "name": "Shanxi",
+        "loc": 126,
         "color": "hsl(209, 70%, 50%)"
       },
       {
         "name": "Liaoning",
-        "loc": 108,
+        "loc": 116,
         "color": "hsl(209, 70%, 50%)"
       },
       {
         "name": "Tianjin",
-        "loc": 95,
+        "loc": 113,
         "color": "hsl(209, 70%, 50%)"
       },
       {
         "name": "Gansu",
-        "loc": 86,
+        "loc": 87,
         "color": "hsl(209, 70%, 50%)"
       },
       {
         "name": "Jilin",
-        "loc": 81,
-        "color": "hsl(209, 70%, 50%)"
-      },
-      {
-        "name": "Inner Mongolia",
-        "loc": 58,
+        "loc": 84,
         "color": "hsl(209, 70%, 50%)"
       },
       {
         "name": "Ningxia",
-        "loc": 49,
+        "loc": 64,
         "color": "hsl(209, 70%, 50%)"
       },
       {
         "name": "Xinjiang",
-        "loc": 49,
+        "loc": 63,
+        "color": "hsl(209, 70%, 50%)"
+      },
+      {
+        "name": "Inner Mongolia",
+        "loc": 61,
         "color": "hsl(209, 70%, 50%)"
       },
       {
@@ -166,12 +166,25 @@ export const ChoroplethData = [
   },
   {
     "name": "Others",
-    "sum": 135,
+    "sum": 175,
     "color": "hsl(209, 70%, 50%)",
     "children": [
       {
         "name": "Diamond Princess cruise ship",
-        "loc": 135,
+        "loc": 175,
+        "color": "hsl(209, 70%, 50%)"
+      }
+    ]
+  },
+  {
+    "id": "HKG",
+    "name": "Hong Kong",
+    "sum": 50,
+    "color": "hsl(209, 70%, 50%)",
+    "children": [
+      {
+        "name": "Hong Kong",
+        "loc": 50,
         "color": "hsl(209, 70%, 50%)"
       }
     ]
@@ -179,38 +192,25 @@ export const ChoroplethData = [
   {
     "id": "SGP",
     "name": "Singapore",
-    "sum": 45,
+    "sum": 50,
     "color": "hsl(209, 70%, 50%)"
-  },
-  {
-    "id": "HKG",
-    "name": "Hong Kong",
-    "sum": 38,
-    "color": "hsl(209, 70%, 50%)",
-    "children": [
-      {
-        "name": "Hong Kong",
-        "loc": 38,
-        "color": "hsl(209, 70%, 50%)"
-      }
-    ]
   },
   {
     "id": "THA",
     "name": "Thailand",
-    "sum": 32,
-    "color": "hsl(209, 70%, 50%)"
-  },
-  {
-    "id": "KOR",
-    "name": "South Korea",
-    "sum": 27,
+    "sum": 33,
     "color": "hsl(209, 70%, 50%)"
   },
   {
     "id": "JPN",
     "name": "Japan",
-    "sum": 26,
+    "sum": 28,
+    "color": "hsl(209, 70%, 50%)"
+  },
+  {
+    "id": "KOR",
+    "name": "South Korea",
+    "sum": 28,
     "color": "hsl(209, 70%, 50%)"
   },
   {
@@ -235,13 +235,13 @@ export const ChoroplethData = [
   {
     "id": "DEU",
     "name": "Germany",
-    "sum": 14,
+    "sum": 16,
     "color": "hsl(209, 70%, 50%)"
   },
   {
     "id": "VNM",
     "name": "Vietnam",
-    "sum": 14,
+    "sum": 15,
     "color": "hsl(209, 70%, 50%)"
   },
   {
@@ -266,7 +266,7 @@ export const ChoroplethData = [
   {
     "id": "GBR",
     "name": "UK",
-    "sum": 8,
+    "sum": 9,
     "color": "hsl(209, 70%, 50%)"
   },
   {
@@ -359,7 +359,7 @@ export const ChoroplethData = [
   {
     "id": "USA",
     "name": "US",
-    "sum": 12,
+    "sum": 13,
     "color": "hsl(209, 70%, 50%)",
     "children": [
       {
@@ -394,6 +394,11 @@ export const ChoroplethData = [
       },
       {
         "name": "Orange, CA",
+        "loc": 1,
+        "color": "hsl(209, 70%, 50%)"
+      },
+      {
+        "name": "San Diego County, CA",
         "loc": 1,
         "color": "hsl(209, 70%, 50%)"
       },

@@ -30,13 +30,13 @@
 .Dashbox {
   display: grid;
   grid-area: dashbox;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: auto auto auto auto;
   column-gap: 1em;
 }
 
 .Box {
   display: block;
-  width: calc((70vw-2em) / 3);
+  width: calc((70vw-3em) / 4);
   height: 10vh;
   background-color: lightgray;
 }
