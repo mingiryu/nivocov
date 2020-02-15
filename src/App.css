@@ -3,16 +3,17 @@
 }
 
 .App-header {
-  background-color: royalblue;
+  background-color: darkslategray;
   width: 100vw;
-  height: 60px;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  color: white;
+  height: 30px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  color: whitesmoke;
 }
 
 .App-title {
   font-size: 1.5em;
+  margin: 0;
 }
 
 .Dashboard {
@@ -38,7 +39,8 @@
   display: block;
   width: calc((70vw-3em) / 4);
   height: 10vh;
-  background-color: lightgray;
+  background-color: whitesmoke;
+  border-radius: 15px;
 }
 
 .Label {
@@ -56,8 +58,9 @@
 .Chart {
   display: block;
   width: calc(30vw - 3em);
-  height: calc((100vh - 100px - 3em)/2);
-  background-color: lightgray;
+  height: calc((100vh - 50px - 3em)/2);
+  background-color: whitesmoke;
+  border-radius: 15px;
 }
 
 #sunburst {
@@ -71,7 +74,7 @@
 #choropleth {
   grid-area: choropleth;
   width: 70vw;
-  height: calc(90vh - 100px - 3em);
+  height: calc(90vh - 50px - 3em);
 }
 
 @media screen and (max-width: 800px) {

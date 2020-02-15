@@ -1,23 +1,24 @@
 import * as React from 'react'
 import { ResponsiveBubble } from '@nivo/circle-packing'
-import { getHierarchyData } from './HierarchyData.js'
 
 export default class Bubble extends React.Component {
     render() {
+        let data = JSON.parse(localStorage.getItem("hierarchy_data"))
+
         return (
             <ResponsiveBubble
-                root={getHierarchyData()}
+                root={data}
                 margin={{ top: 20, right: 20, bottom: 20, left: 20 }}
                 identity="name"
-                value="loc"
-                colors={{ scheme: 'nivo' }}
+                value="confirmed"
+                colors={{ scheme: 'spectral' }}
                 colorBy="name"
                 padding={6}
                 label="name"
                 enableLabel={false}
-                labelTextColor={{ from: 'color', modifiers: [ [ 'darker', 0.8 ] ] }}
-                borderWidth={2}
-                borderColor={{ from: 'color' }}
+                labelTextColor={{ from: 'color', modifiers: [ [ 'darker', 1 ] ] }}
+                borderWidth={1}
+                borderColor="background"
                 defs={[
                     {
                         id: 'lines',

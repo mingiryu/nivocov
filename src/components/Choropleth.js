@@ -1,28 +1,30 @@
 import React from 'react'
 import { ResponsiveChoropleth } from '@nivo/geo'
-import { ChoroplethData } from './ChoroplethData'
 import Countries from './world_countries'
 
 export default class Choropleth extends React.Component {
     render() {
+        let total_confirmed = parseInt(localStorage.getItem("total_confirmed"));
+        let data = JSON.parse(localStorage.getItem("data"))
+
         return (
             <ResponsiveChoropleth
-                data={ChoroplethData}
+                data={data}
                 features={Countries.features}
                 margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
-                colors="nivo"
-                value="sum"
-                domain={[ 0, 60000 ]}
+                colors="spectral"
+                value="confirmed"
+                domain={[ 0, total_confirmed ]}
                 unknownColor="#666666"
                 label="properties.name"
                 valueFormat=".2s"
-                projectionType="naturalEarth1"
-                projectionScale={200}
+                projectionType="azimuthalEquidistant"
+                projectionScale={150}
                 projectionTranslation={[ 0.5, 0.5 ]}
                 projectionRotation={[ 0, 0, 0 ]}
-                enableGraticule={false}
+                enableGraticule={true}
                 graticuleLineColor="#dddddd"
-                borderWidth={0.5}
+                borderWidth={1}
                 borderColor={{ theme: 'background' }}
                 legends={[
                     {
