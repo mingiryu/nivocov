@@ -20,9 +20,9 @@ export default function getData() {
             let total_recovered = 0
 
             data.forEach(entry => {
-                total_confirmed += entry["confirmed"]
-                total_fatalities += entry["fatalities"]
-                total_recovered += entry["recovered"]
+                total_confirmed += entry["total_confirmed"]
+                total_fatalities += entry["total_fatalities"]
+                total_recovered += entry["total_recovered"]
             })
 
             localStorage.setItem("total_confirmed", total_confirmed);
@@ -46,9 +46,9 @@ function parseData(data) {
             let new_entry = {
                 "id": iso_alpha_3,
                 "name": element["Country/Region"],
-                "confirmed": parseInt(element["Confirmed"]),
-                "fatalities": parseInt(element["Deaths"]),
-                "recovered": parseInt(element["Recovered"]),
+                "total_confirmed": parseInt(element["Confirmed"]),
+                "total_fatalities": parseInt(element["Deaths"]),
+                "total_recovered": parseInt(element["Recovered"]),
             }
 
             if (element["Province/State"]) {
@@ -75,7 +75,9 @@ function parseData(data) {
                 "recovered": parseInt(element["Recovered"]),
             }
 
-            entry["confirmed"] += child["confirmed"]
+            entry["total_confirmed"] += child["confirmed"]
+            entry["total_fatalities"] += child["fatalities"]
+            entry["total_recovered"] += child["recovered"]
             entry["children"].push(child)
         }
     });
@@ -94,7 +96,7 @@ function getRegionalData(data) {
         if (!(region in look_idx)) {
             let new_entry = {
                 "name": region,
-                "children": [element],
+                "children": [element]
             }
             result.push(new_entry)
             look_idx[region] = idx

@@ -12,9 +12,7 @@ export default class Bubble extends React.Component {
                 identity="name"
                 value="confirmed"
                 colors={{ scheme: 'spectral' }}
-                colorBy="name"
                 padding={6}
-                label="name"
                 enableLabel={false}
                 labelTextColor={{ from: 'color', modifiers: [ [ 'darker', 1 ] ] }}
                 borderWidth={1}
