@@ -1,15 +1,17 @@
-import React from 'react';
-import Sunburst from './components/Sunburst'
-import Bubble from './components/Bubble'
-import Choropleth from './components/Choropleth';
-import DashBox from './components/DashBox'
-import './App.css';
+import React from "react";
+import Sunburst from "./components/Sunburst";
+import Bubble from "./components/Bubble";
+import Choropleth from "./components/Choropleth";
+import DashBox from "./components/DashBox";
+import "./App.css";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1 className="App-title">2019-nCoV: Confirmed cases of Coronavirus by country and region</h1>
+        <h1 className="App-title">
+          2019-nCoV: Confirmed cases of Coronavirus by country and region
+        </h1>
       </header>
 
       <div className="Dashboard">

@@ -18,10 +18,10 @@
 
 .Dashboard {
   display: grid;
-  grid-template-areas: 
-  "dashbox sunburst"
-  "choropleth sunburst"
-  "choropleth bubble";
+  grid-template-areas:
+    "dashbox sunburst"
+    "choropleth sunburst"
+    "choropleth bubble";
   max-height: 100vh;
   row-gap: 1em;
   column-gap: 1em;
@@ -54,11 +54,10 @@
   font-weight: bolder;
 }
 
-
 .Chart {
   display: block;
   width: calc(30vw - 3em);
-  height: calc((100vh - 50px - 3em)/2);
+  height: calc((100vh - 50px - 3em) / 2);
   background-color: whitesmoke;
   border-radius: 15px;
 }
@@ -89,4 +88,4 @@
   #choropleth {
     width: 140vw;
   }
-} 
+}
