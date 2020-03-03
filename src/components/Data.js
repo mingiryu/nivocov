@@ -4,7 +4,7 @@ import country_to_region from "./CountryToRegion.json";
 
 export default function getData() {
   const d = new Date();
-  let date = `0${d.getMonth() + 1}-${d.getDate() - 1}-${d.getFullYear()}`;
+  let date = `0${d.getMonth() + 1}-0${d.getDate() - 1}-${d.getFullYear()}`;
   let base_url =
     "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/";
   let full_url = base_url + date + ".csv";
