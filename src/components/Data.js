@@ -79,7 +79,9 @@ function parseData(data) {
       entry["total_confirmed"] += child["confirmed"];
       entry["total_fatalities"] += child["fatalities"];
       entry["total_recovered"] += child["recovered"];
-      entry["children"].push(child);
+      if (entry["children"]) {
+        entry["children"].push(child);
+      }
     }
   });
   return result;
