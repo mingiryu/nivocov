@@ -1,91 +1,101 @@
 .App {
-  text-align: center;
-}
-
-.App-header {
-  background-color: darkslategray;
-  width: 100vw;
-  height: 30px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  color: whitesmoke;
-}
-
-.App-title {
-  font-size: 1.5em;
   margin: 0;
 }
 
-.Dashboard {
-  display: grid;
-  grid-template-areas:
-    "dashbox sunburst"
-    "choropleth sunburst"
-    "choropleth bubble";
-  max-height: 100vh;
-  row-gap: 1em;
-  column-gap: 1em;
-  margin: 1em;
-}
-
-.Dashbox {
-  display: grid;
-  grid-area: dashbox;
-  grid-template-columns: auto auto auto auto;
-  column-gap: 1em;
-}
-
-.Box {
+.header {
   display: block;
-  width: calc((70vw-3em) / 4);
-  height: 10vh;
-  background-color: whitesmoke;
-  border-radius: 15px;
+  width: 100vw;
+  background: lightslategray;
+  font-size: 24px;
+  color: white;
+  padding: 20px;
+  text-align: center;
 }
 
-.Label {
-  font-size: 1.5vh;
-  margin: 1vh;
-}
-
-.Data {
-  font-size: 4vh;
-  margin: 0px;
-  font-weight: bolder;
-}
-
-.Chart {
+.footer {
   display: block;
-  width: calc(30vw - 3em);
-  height: calc((100vh - 50px - 3em) / 2);
-  background-color: whitesmoke;
-  border-radius: 15px;
+  width: 100vw;
+  background: lightslategray;
+  margin-top: 20px;
+  padding: 10px;
+  text-align: center;
 }
 
-#sunburst {
-  grid-area: sunburst;
+.footer a {
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
 }
 
-#bubble {
-  grid-area: bubble;
+.one {
+  display: grid;
+  grid-template-columns: auto;
+  text-align: center;
 }
 
-#choropleth {
-  grid-area: choropleth;
-  width: 70vw;
-  height: calc(90vh - 50px - 3em);
+.two {
+  display: grid;
+  grid-template-columns: auto auto;
+  text-align: center;
 }
 
-@media screen and (max-width: 800px) {
-  .App-header {
-    width: 200vw;
+.three {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  text-align: center;
+}
+
+.bar {
+  display: block;
+  width: 100vw;
+  height: 50vh;
+}
+
+.map {
+  display: block;
+  width: 33vw;
+  height: 50vh;
+}
+
+.chart {
+  display: block;
+  width: 50vw;
+  height: 50vh;
+  margin: 0;
+  padding: 0;
+}
+
+.bar p {
+  display: inline;
+  position: relative;
+  top: 35px;
+ }
+
+.map p {
+  display: inline;
+  position: relative;
+ }
+
+.chart p {
+ display: inline;
+ position: relative;
+ top: 50px;
+}
+
+@media screen and (max-width: 1000px) {
+  .two {
+    grid-template-columns: auto;
   }
 
-  .Chart {
-    width: calc(60vw - 3em);
+  .three {
+    grid-template-columns: auto;
   }
 
-  #choropleth {
-    width: 140vw;
+  .map {
+    width: 100vw;
+  }
+
+  .chart {
+    width: 100vw;
   }
 }

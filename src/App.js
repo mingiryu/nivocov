@@ -1,33 +1,111 @@
 import React from "react";
-import Sunburst from "./components/Sunburst";
-import Bubble from "./components/Bubble";
-import Choropleth from "./components/Choropleth";
-import DashBox from "./components/DashBox";
+import * as d3 from "d3";
 import "./App.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <h1 className="App-title">
-          2019-nCoV: Confirmed cases of Coronavirus by country and region
-        </h1>
-      </header>
+import BarChart from "./components/BarChart"
+import Choropleth from "./components/Choropleth";
+import LineChart from "./components/LineChart";
 
-      <div className="Dashboard">
-        <DashBox />
-        <div className="Chart" id="sunburst">
-          <Sunburst />
+const BASE_URL =
+  "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/";
+const CONFIRMED_URL = BASE_URL + "time_series_19-covid-Confirmed.csv";
+const DEATHS_URL = BASE_URL + "time_series_19-covid-Deaths.csv";
+const RECOVERED_URL = BASE_URL + "time_series_19-covid-Recovered.csv";
+const DAILY_URL =
+  "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/";
+
+let TODAY = new Date();
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      today: null,
+      columns: null,
+      confirmed: null,
+      deaths: null,
+      recovered: null,
+      daily: null
+    };
+
+    this.fetchData();
+  }
+
+  getDailyUrl() {
+    return `${DAILY_URL}${("0" + (TODAY.getMonth() + 1)).slice(-2) +
+      "-" +
+      ("0" + TODAY.getDate()).slice(-2) +
+      "-" +
+      TODAY.getFullYear()}${".csv"}`;
+  }
+
+  fetchData() {
+    d3.csv(CONFIRMED_URL).then(d =>
+      this.setState({
+        confirmed: d,
+        columns: d.columns,
+        today: d.columns.slice(-1)[0]
+      })
+    );
+    d3.csv(DEATHS_URL).then(d => this.setState({ deaths: d }));
+    d3.csv(RECOVERED_URL).then(d => this.setState({ recovered: d }));
+    d3.csv(this.getDailyUrl())
+      .then(d => this.setState({ daily: d }))
+      .catch(err => {
+        // Get yesterday's data if today fails
+        TODAY.setDate(TODAY.getDate() - 1);
+        d3.csv(this.getDailyUrl()).then(d => this.setState({ daily: d }));
+      });
+  }
+
+  render() {
+    if (
+      !this.state.confirmed ||
+      !this.state.deaths ||
+      !this.state.recovered ||
+      !this.state.daily
+    )
+      return null;
+
+    return (
+      <div className="App">
+        <div className="header">2019-nCoV: Novel Coronavirus Data Visualization</div>
+        <BarChart data={{data: this.state.daily }}></BarChart>
+        <Choropleth data={{ data: this.state.daily }}></Choropleth>
+        <div className="two">
+          <div className="chart">
+            <p>Mainland China</p>
+            <LineChart
+              data={{
+                ...this.state,
+                country: "Mainland China",
+                province: "Hubei"
+              }}
+            ></LineChart>
+          </div>
+          <div className="chart">
+            <p>Italy</p>
+            <LineChart
+              data={{ ...this.state, country: "Italy", province: "" }}
+            ></LineChart>
+          </div>
+          <div className="chart">
+            <p>South Korea</p>
+            <LineChart
+              data={{ ...this.state, country: "South Korea", province: "" }}
+            ></LineChart>
+          </div>
+          <div className="chart">
+            <p>Iran</p>
+            <LineChart
+              data={{ ...this.state, country: "Iran", province: "" }}
+            ></LineChart>
+          </div>
         </div>
-        <div className="Chart" id="bubble">
-          <Bubble />
-        </div>
-        <div className="Chart" id="choropleth">
-          <Choropleth />
-        </div>
+        <div className="footer"><a href="https://github.com/CSSEGISandData/COVID-19">Data from Johns Hopkins CSSE</a></div>
       </div>
-    </div>
-  );
+    );
+  }
 }
-
 export default App;

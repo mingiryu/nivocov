@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@nivo/bar": "^0.61.1",
     "@nivo/circle-packing": "^0.61.0",
     "@nivo/geo": "^0.61.1",
     "@nivo/line": "^0.61.1",
