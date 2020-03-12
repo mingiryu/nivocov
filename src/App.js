@@ -75,11 +75,11 @@ class App extends React.Component {
         <Choropleth data={{ data: this.state.daily }}></Choropleth>
         <div className="two">
           <div className="chart">
-            <p>Hubei, Mainland China</p>
+            <p>Hubei, China</p>
             <LineChart
               data={{
                 ...this.state,
-                country: "Mainland China",
+                country: "China",
                 province: "Hubei"
               }}
             ></LineChart>
@@ -91,15 +91,15 @@ class App extends React.Component {
             ></LineChart>
           </div>
           <div className="chart">
-            <p>Republic of Korea</p>
+            <p>Korea, South</p>
             <LineChart
-              data={{ ...this.state, country: "Republic of Korea", province: "" }}
+              data={{ ...this.state, country: "Korea, South", province: "" }}
             ></LineChart>
           </div>
           <div className="chart">
-            <p>Iran (Islamic Republic of)</p>
+            <p>Iran</p>
             <LineChart
-              data={{ ...this.state, country: "Iran (Islamic Republic of)", province: "" }}
+              data={{ ...this.state, country: "Iran", province: "" }}
             ></LineChart>
           </div>
           <div className="chart">

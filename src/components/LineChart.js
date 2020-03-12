@@ -68,7 +68,7 @@ class LineChart extends React.Component {
     let idx = this.getIdx();
     let confirmed = this.state.confirmed[idx];
     let max = +confirmed[this.state.columns[this.state.columns.length - 2]];
-    console.log(this.state.country, this.state.province, max)
+
     return (
       <ResponsiveLine
         data={this.parseData(idx)}
