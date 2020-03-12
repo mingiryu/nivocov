@@ -70,12 +70,12 @@ class App extends React.Component {
 
     return (
       <div className="App">
-        <div className="header">2019-nCoV: Novel Coronavirus Data Visualization</div>
+        <div className="header">COVID-19: Novel Coronavirus Data Visualization</div>
         <BarChart data={{data: this.state.daily }}></BarChart>
         <Choropleth data={{ data: this.state.daily }}></Choropleth>
         <div className="two">
           <div className="chart">
-            <p>Mainland China</p>
+            <p>Hubei, Mainland China</p>
             <LineChart
               data={{
                 ...this.state,
@@ -91,15 +91,27 @@ class App extends React.Component {
             ></LineChart>
           </div>
           <div className="chart">
-            <p>South Korea</p>
+            <p>Republic of Korea</p>
             <LineChart
-              data={{ ...this.state, country: "South Korea", province: "" }}
+              data={{ ...this.state, country: "Republic of Korea", province: "" }}
             ></LineChart>
           </div>
           <div className="chart">
-            <p>Iran</p>
+            <p>Iran (Islamic Republic of)</p>
             <LineChart
-              data={{ ...this.state, country: "Iran", province: "" }}
+              data={{ ...this.state, country: "Iran (Islamic Republic of)", province: "" }}
+            ></LineChart>
+          </div>
+          <div className="chart">
+            <p>Cook County, IL, US</p>
+            <LineChart
+              data={{ ...this.state, country: "US", province: "Cook County, IL" }}
+            ></LineChart>
+          </div>
+          <div className="chart">
+            <p>Los Angeles, CA, US</p>
+            <LineChart
+              data={{ ...this.state, country: "US", province: "Los Angeles, CA" }}
             ></LineChart>
           </div>
         </div>

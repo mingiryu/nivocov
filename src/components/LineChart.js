@@ -27,11 +27,12 @@ class LineChart extends React.Component {
 
   getIdx() {
     let d = this.state.confirmed;
-    for (let i = 0; i < d.length; i++) {
+    for (var i = 0; i < d.length; i++) {
       if (d[i]["Country/Region"] == this.state.country && d[i]["Province/State"] == this.state.province) {
         return i
       } 
     }
+    console.log(this.state.province, this.state.country)
   }
 
   parseData(idx) {
@@ -49,7 +50,6 @@ class LineChart extends React.Component {
 
     dates.forEach(date => {
       let y = +row[date];
-      
       if (y) { // Drop zeros since we are using log scale.
         points.push({
           x: date + "20", // Change year format from YY to YYYY.
@@ -67,8 +67,8 @@ class LineChart extends React.Component {
   render() {
     let idx = this.getIdx();
     let confirmed = this.state.confirmed[idx];
-    let max = +confirmed[this.state.columns[this.state.columns.length - 1]];
-
+    let max = +confirmed[this.state.columns[this.state.columns.length - 2]];
+    console.log(this.state.country, this.state.province, max)
     return (
       <ResponsiveLine
         data={this.parseData(idx)}
