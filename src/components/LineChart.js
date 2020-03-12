@@ -141,6 +141,8 @@ class LineChart extends React.Component {
         animate={false}
         enableSlices="x"
         sliceTooltip={({ slice }) => {
+          console.log(slice)
+
           return (
             <div
               style={{
@@ -151,6 +153,7 @@ class LineChart extends React.Component {
             >
               <div>{this.state.province}</div>
               <div>{this.state.country}</div>
+              <strong>{slice.points[0].data.xFormatted}</strong>
               {slice.points.map(point => (
                 <div
                   key={point.id}
