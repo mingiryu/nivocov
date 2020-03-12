@@ -67,6 +67,8 @@ class LineChart extends React.Component {
   render() {
     let idx = this.getIdx();
     let confirmed = this.state.confirmed[idx];
+    if (!confirmed) return null;
+
     let max = +confirmed[this.state.columns[this.state.columns.length - 2]];
 
     return (

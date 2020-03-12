@@ -109,9 +109,9 @@ class App extends React.Component {
             ></LineChart>
           </div>
           <div className="chart">
-            <p>Los Angeles, CA, US</p>
+            <p>British Columbia, Canada</p>
             <LineChart
-              data={{ ...this.state, country: "US", province: "Los Angeles, CA" }}
+              data={{ ...this.state, country: "Canada", province: "British Columbia" }}
             ></LineChart>
           </div>
         </div>
