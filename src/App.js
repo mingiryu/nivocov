@@ -103,19 +103,19 @@ class App extends React.Component {
             ></LineChart>
           </div>
           <div className="chart">
-            <p>Cook County, IL, US</p>
+            <p>France</p>
             <LineChart
-              data={{ ...this.state, country: "US", province: "Cook County, IL" }}
+              data={{ ...this.state, country: "France", province: "France" }}
             ></LineChart>
           </div>
           <div className="chart">
-            <p>British Columbia, Canada</p>
+            <p>Spain</p>
             <LineChart
-              data={{ ...this.state, country: "Canada", province: "British Columbia" }}
+              data={{ ...this.state, country: "Spain", province: "" }}
             ></LineChart>
           </div>
         </div>
-        <div className="footer"><a href="https://github.com/CSSEGISandData/COVID-19">Data from Johns Hopkins CSSE</a></div>
+        <div className="footer"><a href="https://github.com/CSSEGISandData/COVID-19" target="_blank">Data from Johns Hopkins CSSE</a></div>
       </div>
     );
   }
