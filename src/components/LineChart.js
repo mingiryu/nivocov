@@ -65,7 +65,7 @@ class LineChart extends React.Component {
     return (
       <div className="chart">
         <hr></hr>
-        <span>Time Series</span>
+        <span>Trends</span>
         <ResponsiveLine
           data={this.parseData()}
           margin={{ top: 10, right: 30, bottom: 50, left: 120 }}

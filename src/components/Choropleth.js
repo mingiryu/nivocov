@@ -47,7 +47,7 @@ class Choropleth extends React.Component {
     return (
       <div className="map">
         <hr></hr>
-        <span>Choropleth</span>
+        <span>Worldwide</span>
         <ResponsiveChoropleth
           data={this.parseData(this.props.data)}
           features={Countries.features}
