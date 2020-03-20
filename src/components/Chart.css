@@ -1,0 +1,47 @@
+.two {
+  display: grid;
+  grid-template-columns: auto auto;
+  margin-top: 1em;
+}
+
+.three {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  margin-top: 1em;
+}
+
+.bar {
+  display: block;
+  width: 30vw;
+  height: 120vh;
+}
+
+.map {
+  display: block;
+  width: auto;
+  max-width: 60vw;
+  height: 50vh;
+  margin: 2em 0;
+}
+
+.chart {
+  display: block;
+  width: auto;
+  max-width: 60vw;
+  height: 50vh;
+  margin: 0.5em 0;
+}
+
+@media screen and (max-width: 1000px) {
+  .bar {
+    display: none;
+  }
+
+  .map {
+    max-width: 90vw;
+  }
+
+  .chart {
+    max-width: 90vw;
+  }
+}
