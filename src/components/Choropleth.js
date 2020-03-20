@@ -46,6 +46,8 @@ class Choropleth extends React.Component {
 
     return (
       <div className="map">
+        <hr></hr>
+        <span>Choropleth</span>
         <ResponsiveChoropleth
           data={this.parseData(this.props.data)}
           features={Countries.features}
@@ -56,7 +58,7 @@ class Choropleth extends React.Component {
           unknownColor="#666666"
           label="properties.name"
           valueFormat=".2s"
-          projectionScale={125}
+          projectionScale={175}
           projectionTranslation={[0.5, 0.75]}
           projectionRotation={[0, 0, 0]}
           enableGraticule={true}

@@ -64,9 +64,11 @@ class LineChart extends React.Component {
   render() {
     return (
       <div className="chart">
+        <hr></hr>
+        <span>Time Series</span>
         <ResponsiveLine
           data={this.parseData()}
-          margin={{ top: 20, right: 30, bottom: 50, left: 70 }}
+          margin={{ top: 10, right: 30, bottom: 50, left: 120 }}
           xScale={{
             type: "time",
             format: "%m/%d/%Y",
@@ -95,7 +97,7 @@ class LineChart extends React.Component {
             tickPadding: 5,
             tickRotation: 0,
             legend: `Cases (${ this.props.scale } scale)`,
-            legendOffset: -50,
+            legendOffset: -70,
             legendPosition: "middle"
           }}
           colors={{ scheme: "pastel1" }}

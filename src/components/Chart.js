@@ -5,6 +5,7 @@ import * as d3 from "d3";
 import BarChart from "./BarChart";
 import Choropleth from "./Choropleth";
 import LineChart from "./LineChart";
+import Header from "./Header"
 
 const BASE_URL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/";
 const CONFIRMED_URL = BASE_URL + "time_series_19-covid-Confirmed.csv";
@@ -69,13 +70,14 @@ class Chart extends React.Component {
             <div className="two">
                 <BarChart data={this.state.daily} updateCountry={this.updateCountry}></BarChart>
                 <div>
-                    <div className="three">
+                    <Header></Header>
+                    <div className="buttonGroup">
                         <button onClick={() => this.setState({ type: "Confirmed" })}>Confirmed</button>
                         <button onClick={() => this.setState({ type: "Recovered" })}>Recovered</button>
                         <button onClick={() => this.setState({ type: "Deaths" })}>Deaths</button>
                     </div>
                     <Choropleth data={this.state.daily} type={this.state.type} updateCountry={this.updateCountry}></Choropleth>
-                    <div className="two">
+                    <div className="buttonGroup">
                         <button onClick={() => this.setState({ scale: "linear" })}>Linear</button>
                         <button onClick={() => this.setState({ scale: "log" })}>Log</button>
                     </div>
