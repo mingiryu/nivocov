@@ -1,5 +1,6 @@
 import React from "react";
 import { ResponsiveLine } from "@nivo/line";
+import CountryLookup from "./CountryLookup";
 
 /*  Chart data, which must conform to this structure:
     Array<{
@@ -12,36 +13,32 @@ import { ResponsiveLine } from "@nivo/line";
 */
 
 class LineChart extends React.Component {
-  constructor(props) {
-    super(props);
+  findMatches() {
+    let d = this.props.confirmed;
+    let matches = []
 
-    this.state = {
-      columns: props.data.columns,
-      confirmed: props.data.confirmed,
-      deaths: props.data.deaths,
-      recovered: props.data.recovered,
-      country: props.data.country,
-      province: props.data.province
-    };
-  }
-
-  getIdx() {
-    let d = this.state.confirmed;
-    for (var i = 0; i < d.length; i++) {
-      if (d[i]["Country/Region"] == this.state.country && d[i]["Province/State"] == this.state.province) {
-        return i
-      } 
+    for (let i = 0; i < d.length; i++) {
+      let country1 = CountryLookup[d[i]["Country/Region"]]
+      let country2 = CountryLookup[this.props.country]
+      
+      if (!country1 || !country2) {
+        console.log("Not found:", d[i]["Country/Region"], this.props.country)
+      } else if (country1 == country2) {
+        matches.push(i)
+      }
     }
-    console.log(this.state.province, this.state.country)
+
+    return matches
   }
 
-  parseData(idx) {
-    let dates = this.state.columns.slice(4, this.state.columns.length);
+  parseData() {
+    let idx = this.findMatches()[0]
+    let dates = this.props.columns.slice(4, this.props.columns.length);
 
     return [ // The order of the array elements has an effect on the order of the custom toolkit.
-      this.parseRow("Deaths", this.state.deaths[idx], dates),
-      this.parseRow("Recovered", this.state.recovered[idx], dates),
-      this.parseRow("Confirmed", this.state.confirmed[idx], dates),
+      this.parseRow("Deaths", this.props.deaths[idx], dates),
+      this.parseRow("Recovered", this.props.recovered[idx], dates),
+      this.parseRow("Confirmed", this.props.confirmed[idx], dates),
     ];
   }
 
@@ -65,112 +62,106 @@ class LineChart extends React.Component {
   }
 
   render() {
-    let idx = this.getIdx();
-    let confirmed = this.state.confirmed[idx];
-    if (!confirmed) return null;
-
-    let max = +confirmed[this.state.columns[this.state.columns.length - 2]];
-
     return (
-      <ResponsiveLine
-        data={this.parseData(idx)}
-        margin={{ top: 50, right: 30, bottom: 50, left: 70 }}
-        xScale={{
-          type: "time",
-          format: "%m/%d/%Y",
-          precision: "day"
-        }}
-        xFormat="time:%m/%d/%Y"
-        yScale={{
-          type: "log",
-          min: "auto",
-          max: max,
-          stacked: false,
-          reverse: false
-        }}
-        curve="catmullRom"
-        axisTop={null}
-        axisRight={null}
-        axisBottom={{
-          format: "%b %d",
-          legend: "Dates (month/day)",
-          legendOffset: 36,
-          legendPosition: "middle"
-        }}
-        axisLeft={{
-          orient: "left",
-          tickSize: 5,
-          tickPadding: 5,
-          tickRotation: 0,
-          legend: "Cases (logarithmic scale)",
-          legendOffset: -50,
-          legendPosition: "middle"
-        }}
-        colors={{ scheme: "pastel1" }}
-        pointSize={10}
-        pointColor={{ theme: "background" }}
-        pointBorderWidth={2}
-        pointBorderColor={{ from: "serieColor" }}
-        pointLabel="y"
-        pointLabelYOffset={-12}
-        useMesh={true}
-        legends={[
-          {
-            anchor: "top-left",
-            direction: "column",
-            justify: false,
-            translateX: 20,
-            translateY: 20,
-            itemsSpacing: 0,
-            itemDirection: "left-to-right",
-            itemWidth: 80,
-            itemHeight: 20,
-            itemOpacity: 0.75,
-            symbolSize: 12,
-            symbolShape: "circle",
-            symbolBorderColor: "rgba(0, 0, 0, .5)",
-            effects: [
-              {
-                on: "hover",
-                style: {
-                  itemBackground: "rgba(0, 0, 0, .03)",
-                  itemOpacity: 1
+      <div className="chart">
+        <ResponsiveLine
+          data={this.parseData()}
+          margin={{ top: 20, right: 30, bottom: 50, left: 70 }}
+          xScale={{
+            type: "time",
+            format: "%m/%d/%Y",
+            precision: "day"
+          }}
+          xFormat="time:%m/%d/%Y"
+          yScale={{
+            type: this.props.scale,
+            min: "auto",
+            max: "auto",
+            stacked: false,
+            reverse: false
+          }}
+          curve="catmullRom"
+          axisTop={null}
+          axisRight={null}
+          axisBottom={{
+            format: "%b %d",
+            legend: "Dates (month/day)",
+            legendOffset: 36,
+            legendPosition: "middle"
+          }}
+          axisLeft={{
+            orient: "left",
+            tickSize: 5,
+            tickPadding: 5,
+            tickRotation: 0,
+            legend: `Cases (${ this.props.scale } scale)`,
+            legendOffset: -50,
+            legendPosition: "middle"
+          }}
+          colors={{ scheme: "pastel1" }}
+          pointSize={10}
+          pointColor={{ theme: "background" }}
+          pointBorderWidth={2}
+          pointBorderColor={{ from: "serieColor" }}
+          pointLabel="y"
+          pointLabelYOffset={-12}
+          useMesh={true}
+          legends={[
+            {
+              anchor: "top-left",
+              direction: "column",
+              justify: false,
+              translateX: 20,
+              translateY: 20,
+              itemsSpacing: 0,
+              itemDirection: "left-to-right",
+              itemWidth: 80,
+              itemHeight: 20,
+              itemOpacity: 0.75,
+              symbolSize: 12,
+              symbolShape: "circle",
+              symbolBorderColor: "white",
+              effects: [
+                {
+                  on: "hover",
+                  style: {
+                    itemBackground: "white",
+                    itemOpacity: 1
+                  }
                 }
-              }
-            ]
-          }
-        ]}
-        animate={false}
-        enableSlices="x"
-        sliceTooltip={({ slice }) => {
-          console.log(slice)
-
-          return (
-            <div
-              style={{
-                background: "white",
-                padding: "9px 12px",
-                border: "1px solid #ccc"
-              }}
-            >
-              <div>{this.state.province}</div>
-              <div>{this.state.country}</div>
-              <strong>{slice.points[0].data.xFormatted}</strong>
-              {slice.points.map(point => (
-                <div
-                  key={point.id}
-                  style={{
-                    color: point.serieColor,
-                    padding: "3px 0"
-                  }}
-                >
-                  <strong>{point.serieId}</strong> [{point.data.yFormatted}]
-                </div>
-              ))}
-            </div>
-          );
-        }}
-      />
+              ]
+            }
+          ]}
+          animate={true}
+          enableSlices="x"
+          sliceTooltip={({ slice }) => {
+            return (
+              <div
+                style={{
+                  background: "white",
+                  padding: "9px 12px",
+                  border: "1px solid #ccc",
+                  boxShadow: "1px 1px 1px gray"
+                }}
+              >
+                <div>{this.props.country}</div>
+                <strong>{slice.points[0].data.xFormatted}</strong>
+                {slice.points.map(point => (
+                  <div
+                    key={point.id}
+                    style={{
+                      color: point.serieColor,
+                      padding: "3px 0"
+                    }}
+                  >
+                    <strong>{point.serieId}</strong> [{point.data.yFormatted}]
+                  </div>
+                ))}
+              </div>
+            );
+          }}
+        />
+      </div>
     );
   }
 }

@@ -3,14 +3,6 @@ import { ResponsiveBar } from "@nivo/bar";
 import CountryLookup from "./CountryLookup";
 
 class BarChart extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      data: this.parseData(props.data.data)
-    };
-  }
-
   parseData(data) {
     let res = {};
 
@@ -38,27 +30,33 @@ class BarChart extends React.Component {
         Country: res[key].name,
         "Fatality %": ((res[key].Deaths / res[key].Confirmed) * 100).toFixed(1),
         "Recovery %": ((res[key].Recovered / res[key].Confirmed) * 100).toFixed(1),
+        "Active %": (((res[key].Confirmed-res[key].Deaths-res[key].Recovered) / res[key].Confirmed) * 100).toFixed(1),
       };
     });
+  }
+
+  onClick(data, event) {
+    this.props.updateCountry(data.data.Country)
   }
 
   render() {
     return (
       <div className="one">
         <div className="bar">
-          <p>Fatality and Recovery</p>
           <ResponsiveBar
-            data={this.state.data.slice(0, 25)}
-            keys={["Fatality %", "Recovery %"]}
+            data={this.parseData(this.props.data).slice(0, 50).reverse()}
+            keys={["Fatality %", "Recovery %", "Active %"]}
             indexBy="Country"
-            margin={{ top: 10, right: 50, bottom: 70, left: 60 }}
-            groupMode="grouped"
+            margin={{ top: 30, right: 50, bottom: 70, left: 150 }}
+            groupMode="stacked"
+            layout="horizontal"
             colors={{ scheme: "pastel1" }}
             maxValue={100}
+            onClick={(data, event) => this.onClick(data, event)} 
             axisBottom={{
               tickPadding: 5,
               tickRotation: 0,
-              legend: "Country",
+              legend: "(%)",
               legendPosition: "middle",
               legendOffset: 32
             }}
@@ -66,9 +64,9 @@ class BarChart extends React.Component {
               tickSize: 5,
               tickPadding: 5,
               tickRotation: 0,
-              legend: "Rate %",
-              legendPosition: "middle",
-              legendOffset: -40
+              legend: "",
+              legendPosition: "top",
+              legendOffset: 0,
             }}
             labelSkipWidth={12}
             labelSkipHeight={12}
@@ -76,10 +74,10 @@ class BarChart extends React.Component {
             legends={[
               {
                 dataFrom: "keys",
-                anchor: "top-right",
-                direction: "column",
+                anchor: "top-left",
+                direction: "row",
                 translateX: 0,
-                translateY: 0,
+                translateY: -20,
                 itemsSpacing: 2,
                 itemWidth: 100,
                 itemHeight: 20,

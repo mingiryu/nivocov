@@ -1,101 +1,49 @@
-.App {
-  margin: 0;
+:root {
+  --primary-color: lightslategray;
+  --primary-color-dark: slategray;
 }
 
-.header {
-  display: block;
-  width: 100vw;
-  background: lightslategray;
+.App {
+  text-align: center;
+  margin: 0 5vw;
+}
+
+h1 {
+  font-weight: normal;
   font-size: 24px;
   color: white;
-  padding: 20px;
-  text-align: center;
-}
-
-.footer {
-  display: block;
-  width: 100vw;
-  background: lightslategray;
-  margin-top: 20px;
-  padding: 10px;
-  text-align: center;
-}
-
-.footer a {
-  text-decoration: none;
-  color: white;
-  font-size: 18px;
-}
-
-.one {
-  display: grid;
-  grid-template-columns: auto;
-  text-align: center;
-}
-
-.two {
-  display: grid;
-  grid-template-columns: auto auto;
-  text-align: center;
-}
-
-.three {
-  display: grid;
-  grid-template-columns: auto auto auto;
-  text-align: center;
-}
-
-.bar {
-  display: block;
-  width: 100vw;
-  height: 50vh;
-}
-
-.map {
-  display: block;
-  width: 33vw;
-  height: 50vh;
-}
-
-.chart {
-  display: block;
-  width: 50vw;
-  height: 50vh;
+  background: var(--primary-color);
+  padding: 1em 0;
   margin: 0;
-  padding: 0;
 }
 
-.bar p {
-  display: inline;
-  position: relative;
-  top: 35px;
- }
-
-.map p {
-  display: inline;
-  position: relative;
- }
-
-.chart p {
- display: inline;
- position: relative;
- top: 50px;
+h2 {
+  font-weight: normal;
+  font-size: 18px;
+  color: white;
+  background: var(--primary-color);
+  padding: 0.5em 0;
+  margin: 0;
 }
 
-@media screen and (max-width: 1000px) {
-  .two {
-    grid-template-columns: auto;
-  }
+a {
+  color: white;
+}
 
-  .three {
-    grid-template-columns: auto;
-  }
+button {
+  padding: 0.5em;
+  margin: 0 0.5em;
+  color: white;
+  background: var(--primary-color);
+  border-width: 0;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px gray;
+}
 
-  .map {
-    width: 100vw;
-  }
+button:hover {
+  background: var(--primary-color-dark);
+}
 
-  .chart {
-    width: 100vw;
-  }
+button:active {
+  transform: translateY(1px);
 }
