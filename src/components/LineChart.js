@@ -1,6 +1,6 @@
 import React from "react";
 import { ResponsiveLine } from "@nivo/line";
-import CountryLookup from "./CountryLookup";
+import toISO from "./toISO";
 
 /*  Chart data, which must conform to this structure:
     Array<{
@@ -13,52 +13,45 @@ import CountryLookup from "./CountryLookup";
 */
 
 class LineChart extends React.Component {
-  findMatches() {
-    let d = this.props.confirmed;
-    let matches = []
+  constructor(props) {
+    super(props)
 
-    for (let i = 0; i < d.length; i++) {
-      let country1 = CountryLookup[d[i]["Country/Region"]]
-      let country2 = CountryLookup[this.props.country]
-      
-      if (!country1 || !country2) {
-        console.log("Not found:", d[i]["Country/Region"], this.props.country)
-      } else if (country1 == country2) {
-        matches.push(i)
-      }
+    this.state = { 
+      confirmed: this.props.confirmed, 
+      recovered: this.props.recovered,
+      deaths: this.props.deaths, 
+      dates: this.props.columns.slice(4, this.props.columns.length)
     }
-
-    return matches
   }
 
   parseData() {
-    let idx = this.findMatches()[0]
-    let dates = this.props.columns.slice(4, this.props.columns.length);
+    const target = toISO[this.props.country]
 
     return [ // The order of the array elements has an effect on the order of the custom toolkit.
-      this.parseRow("Deaths", this.props.deaths[idx], dates),
-      this.parseRow("Recovered", this.props.recovered[idx], dates),
-      this.parseRow("Confirmed", this.props.confirmed[idx], dates),
+      {id: "Deaths", data: this.aggData(target, this.state.deaths)},
+      {id: "Recovered", data: this.aggData(target, this.state.recovered)},
+      {id: "Confirmed", data: this.aggData(target, this.state.confirmed)},
     ];
   }
 
-  parseRow(id, row, dates) {
-    let points = []
+  aggData(target, data) {
+    // Allocate data structure
+    let agg = this.state.dates.map(date => ({ x: date + "20", y: 0 }))
 
-    dates.forEach(date => {
-      let y = +row[date];
-      if (y) { // Drop zeros since we are using log scale.
-        points.push({
-          x: date + "20", // Change year format from YY to YYYY.
-          y: y
-        })
+    // Find matches and sum it up
+    data.forEach(d => {
+      const country = toISO[d["Country/Region"]]
+
+      if (country === target) {
+        for (var i = 0; i < this.state.dates.length; i++) {
+          agg[i].y += +d[this.state.dates[i]]
+        }
       }
-    });
+    })
 
-    return {
-      id: id,
-      data: points
-    };
+    // Filter out 0's for log scale
+    agg = agg.filter(d => d.y)
+    return agg
   }
 
   render() {
@@ -96,7 +89,7 @@ class LineChart extends React.Component {
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: `Cases (${ this.props.scale } scale)`,
+            legend: `Cases (${this.props.scale} scale)`,
             legendOffset: -70,
             legendPosition: "middle"
           }}

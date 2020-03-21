@@ -20,7 +20,6 @@ class Chart extends React.Component {
         super(props);
 
         this.state = {
-            today: null,
             columns: null,
             confirmed: null,
             deaths: null,
@@ -46,8 +45,7 @@ class Chart extends React.Component {
         d3.csv(CONFIRMED_URL).then(d =>
             this.setState({
                 confirmed: d,
-                columns: d.columns,
-                today: d.columns.slice(-1)[0]
+                columns: d.columns
             })
         );
         d3.csv(DEATHS_URL).then(d => this.setState({ deaths: d }));

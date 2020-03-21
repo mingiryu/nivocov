@@ -1,14 +1,20 @@
 import React from "react";
 import { ResponsiveChoropleth } from "@nivo/geo";
 import Countries from "./world_countries";
-import CountryLookup from "./CountryLookup";
+import toISO from "./toISO";
 
 class Choropleth extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {data: this.parseData(this.props.data)}
+  }
+
   parseData(data) {
     let res = {};
 
     data.forEach(element => {
-      const ISO = CountryLookup[element["Country/Region"]];
+      const ISO = toISO[element["Country/Region"]];
 
       if (!ISO)
         console.log(element["Country/Region"])
@@ -38,7 +44,7 @@ class Choropleth extends React.Component {
 
   render() {
     let max;
-    if (this.props.type == "Confirmed") {
+    if (this.props.type === "Confirmed") {
       max = 10000
     } else {
       max = 1000
@@ -49,7 +55,7 @@ class Choropleth extends React.Component {
         <hr></hr>
         <span>Worldwide</span>
         <ResponsiveChoropleth
-          data={this.parseData(this.props.data)}
+          data={this.state.data}
           features={Countries.features}
           margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
           colors="PuOr"

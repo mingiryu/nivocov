@@ -7,7 +7,7 @@ class Header extends React.Component {
         const JHU = "https://github.com/CSSEGISandData/COVID-19"
         return (
             <div>
-                <h1>Exploration of Novel Coronavirus</h1>
+                <h1>Interactive Exploration of Novel Coronavirus</h1>
                 <p>Maintained by <a href={GITHUB}>Mingi Ryu</a>. Enabled by data from <a href={JHU}>Johns Hopkins</a>.</p>
             </div>
         )

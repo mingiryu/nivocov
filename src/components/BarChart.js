@@ -1,13 +1,13 @@
 import React from "react";
 import { ResponsiveBar } from "@nivo/bar";
-import CountryLookup from "./CountryLookup";
+import toISO from "./toISO";
 
 class BarChart extends React.Component {
   parseData(data) {
     let res = {};
 
     data.forEach(element => {
-      const ISO = CountryLookup[element["Country/Region"]];
+      const ISO = toISO[element["Country/Region"]];
 
       if (!ISO) console.log(element["Country/Region"]);
       if (!res[ISO]) {
