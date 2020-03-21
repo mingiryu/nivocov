@@ -45,6 +45,8 @@ class Choropleth extends React.Component {
   render() {
     let max;
     if (this.props.type === "Confirmed") {
+      max = 50000
+    } else if (this.props.type === "Recovered") {
       max = 10000
     } else {
       max = 1000
@@ -58,7 +60,7 @@ class Choropleth extends React.Component {
           data={this.state.data}
           features={Countries.features}
           margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
-          colors="PuOr"
+          colors="YlGnBu"
           value={this.props.type}
           domain={[0, max]}
           unknownColor="#666666"
@@ -70,7 +72,7 @@ class Choropleth extends React.Component {
           enableGraticule={true}
           graticuleLineColor="#dddddd"
           borderWidth={1}
-          borderColor={{ theme: "background" }}
+          borderColor="gray"
           onClick={(data, event) => this.onClick(data, event)} 
           legends={[
             {
