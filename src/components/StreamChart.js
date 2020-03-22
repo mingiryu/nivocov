@@ -69,7 +69,7 @@ class StreamChart extends React.Component {
         return (
             <div className="chart">
                 <hr></hr>
-                <span>Occurrences</span>
+                <span>Trends</span>
                 <ResponsiveStream
                     data={this.parseData()}
                     keys={["Deaths", "Recovered", "Confirmed"]}
