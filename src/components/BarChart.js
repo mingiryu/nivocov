@@ -52,7 +52,7 @@ class BarChart extends React.Component {
         <span>Fatality and Recovery</span>
         <ResponsiveBar
           data={this.parseData(this.props.data)
-            .slice(0, 50)
+            .slice(0, 100)
             .reverse()}
           keys={["Fatality %", "Recovery %", "Active %"]}
           indexBy="Country"
@@ -104,7 +104,7 @@ class BarChart extends React.Component {
             }
           ]}
           animate={true}
-          motionStiffness={100}
+          motionStiffness={50}
           motionDamping={15}
         />
       </div>

@@ -2,10 +2,11 @@ import React from "react";
 import "./Chart.css";
 import * as d3 from "d3";
 
+import Header from "./Header"
 import BarChart from "./BarChart";
 import Choropleth from "./Choropleth";
 import LineChart from "./LineChart";
-import Header from "./Header"
+import StreamChart from "./StreamChart"
 
 const BASE_URL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/";
 const CONFIRMED_URL = BASE_URL + "time_series_19-covid-Confirmed.csv";
@@ -33,8 +34,8 @@ class Chart extends React.Component {
         this.fetchData();
     }
 
-    updateCountry=(name)=> {
-        this.setState({country: name})
+    updateCountry = (name) => {
+        this.setState({ country: name })
     }
 
     getDailyUrl() {
@@ -87,6 +88,13 @@ class Chart extends React.Component {
                         country={this.state.country}
                         scale={this.state.scale}>
                     </LineChart>
+                    <StreamChart
+                        confirmed={this.state.confirmed}
+                        recovered={this.state.recovered}
+                        deaths={this.state.deaths}
+                        columns={this.state.columns}
+                        country={this.state.country}>
+                    </StreamChart>
                 </div>
             </div>
         )

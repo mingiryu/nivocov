@@ -16,10 +16,10 @@ class LineChart extends React.Component {
   constructor(props) {
     super(props)
 
-    this.state = { 
-      confirmed: this.props.confirmed, 
+    this.state = {
+      confirmed: this.props.confirmed,
       recovered: this.props.recovered,
-      deaths: this.props.deaths, 
+      deaths: this.props.deaths,
       dates: this.props.columns.slice(4, this.props.columns.length)
     }
   }
@@ -28,9 +28,9 @@ class LineChart extends React.Component {
     const target = toISO[this.props.country]
 
     return [ // The order of the array elements has an effect on the order of the custom toolkit.
-      {id: "Deaths", data: this.aggData(target, this.state.deaths)},
-      {id: "Recovered", data: this.aggData(target, this.state.recovered)},
-      {id: "Confirmed", data: this.aggData(target, this.state.confirmed)},
+      { id: "Deaths", data: this.aggData(target, this.state.deaths) },
+      { id: "Recovered", data: this.aggData(target, this.state.recovered) },
+      { id: "Confirmed", data: this.aggData(target, this.state.confirmed) },
     ];
   }
 
@@ -61,7 +61,7 @@ class LineChart extends React.Component {
         <span>Trends</span>
         <ResponsiveLine
           data={this.parseData()}
-          margin={{ top: 10, right: 30, bottom: 50, left: 120 }}
+          margin={{ top: 10, right: 30, bottom: 80, left: 120 }}
           xScale={{
             type: "time",
             format: "%m/%d/%Y",
@@ -89,12 +89,12 @@ class LineChart extends React.Component {
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
-            legend: `Cases (${this.props.scale} scale)`,
+            legend: `Total Cases (${this.props.scale} scale)`,
             legendOffset: -70,
             legendPosition: "middle"
           }}
           colors={{ scheme: "pastel1" }}
-          pointSize={10}
+          pointSize={5}
           pointColor={{ theme: "background" }}
           pointBorderWidth={2}
           pointBorderColor={{ from: "serieColor" }}
@@ -128,6 +128,8 @@ class LineChart extends React.Component {
             }
           ]}
           animate={true}
+          motionStiffness={50}
+          motionDamping={15}
           enableSlices="x"
           sliceTooltip={({ slice }) => {
             return (
