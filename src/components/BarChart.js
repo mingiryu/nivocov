@@ -2,9 +2,13 @@ import React from "react";
 import { ResponsiveBar } from "@nivo/bar";
 import toISO from "./toISO";
 
+const MIN_CASES = 100
+
 class BarChart extends React.Component {
   parseData(data) {
     let res = {};
+
+    data = data.filter(d => +d.Confirmed >= MIN_CASES)
 
     data.forEach(element => {
       const ISO = toISO[element["Country_Region"]];
@@ -25,18 +29,13 @@ class BarChart extends React.Component {
         country.Recovered += +element.Recovered;
       }
     });
+
     return Object.keys(res).map(function (key) {
       return {
         Country: res[key].name,
         "Fatality %": ((res[key].Deaths / res[key].Confirmed) * 100).toFixed(1),
-        "Recovery %": ((res[key].Recovered / res[key].Confirmed) * 100).toFixed(
-          1
-        ),
-        "Active %": (
-          ((res[key].Confirmed - res[key].Deaths - res[key].Recovered) /
-            res[key].Confirmed) *
-          100
-        ).toFixed(1)
+        "Recovery %": ((res[key].Recovered / res[key].Confirmed) * 100).toFixed(1),
+        "Active %": (((res[key].Confirmed - res[key].Deaths - res[key].Recovered) /res[key].Confirmed) * 100).toFixed(1)
       };
     });
   }
@@ -49,11 +48,9 @@ class BarChart extends React.Component {
     return (
       <div className="bar">
         <hr></hr>
-        <span>Fatality and Recovery</span>
+        <span>Fatality and Recovery (n > 100)</span>
         <ResponsiveBar
-          data={this.parseData(this.props.data)
-            .slice(0, 100)
-            .reverse()}
+          data={this.parseData(this.props.data)}
           keys={["Fatality %", "Recovery %", "Active %"]}
           indexBy="Country"
           margin={{ top: 30, right: 50, bottom: 70, left: 150 }}
