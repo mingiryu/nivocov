@@ -56,7 +56,8 @@ class Chart extends React.Component {
             .catch(err => {
                 // Get yesterday's data if today fails
                 TODAY.setDate(TODAY.getDate() - 1);
-                d3.csv(this.getDailyUrl()).then(d => this.setState({ daily: d }));
+                d3.csv(this.getDailyUrl())
+                    .then(d => this.setState({ daily: d }));
             });
     }
 

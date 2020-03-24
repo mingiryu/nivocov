@@ -14,14 +14,14 @@ class Choropleth extends React.Component {
     let res = {};
 
     data.forEach(element => {
-      const ISO = toISO[element["Country/Region"]];
+      const ISO = toISO[element["Country_Region"]];
 
       if (!ISO)
-        console.log(element["Country/Region"])
+        console.log(element["Country_Region"])
       if (!res[ISO]) {
         res[ISO] = {
           id: ISO,
-          name: element["Country/Region"],
+          name: element["Country_Region"],
           Confirmed: +element.Confirmed,
           Deaths: +element.Deaths,
           Recovered: +element.Recovered
