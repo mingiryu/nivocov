@@ -80,7 +80,7 @@ class Choropleth extends React.Component {
               direction: "column",
               justify: true,
               translateX: 10,
-              translateY: 150,
+              translateY: 100,
               itemsSpacing: 0,
               itemWidth: 94,
               itemHeight: 18,
