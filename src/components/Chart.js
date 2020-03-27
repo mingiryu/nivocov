@@ -9,9 +9,9 @@ import LineChart from "./LineChart";
 import StreamChart from "./StreamChart"
 
 const BASE_URL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/";
-const CONFIRMED_URL = BASE_URL + "time_series_19-covid-Confirmed.csv";
-const DEATHS_URL = BASE_URL + "time_series_19-covid-Deaths.csv";
-const RECOVERED_URL = BASE_URL + "time_series_19-covid-Recovered.csv";
+const CONFIRMED_URL = BASE_URL + "time_series_covid19_confirmed_global.csv";
+const DEATHS_URL = BASE_URL + "time_series_covid19_deaths_global.csv";
+const RECOVERED_URL = BASE_URL + "time_series_covid19_recovered_global.csv";
 const DAILY_URL = "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/";
 
 let TODAY = new Date();
@@ -55,7 +55,7 @@ class Chart extends React.Component {
             .then(d => this.setState({ daily: d }))
             .catch(err => {
                 // Get yesterday's data if today fails
-                TODAY.setDate(TODAY.getDate() - 1);
+                TODAY.setDate(TODAY.getDate() - 2);
                 d3.csv(this.getDailyUrl())
                     .then(d => this.setState({ daily: d }));
             });
