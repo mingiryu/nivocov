@@ -45,11 +45,11 @@ class Choropleth extends React.Component {
   render() {
     let max;
     if (this.props.type === "Confirmed") {
-      max = 50000
+      max = 100000
     } else if (this.props.type === "Recovered") {
-      max = 10000
+      max = 20000
     } else {
-      max = 1000
+      max = 5000
     }
 
     return (
