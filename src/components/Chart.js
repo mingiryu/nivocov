@@ -83,12 +83,7 @@ class Chart extends React.Component {
     }
 
     render() {
-        if (
-            !this.state.confirmed ||
-            !this.state.deaths ||
-            !this.state.recovered ||
-            !this.state.daily
-        ) {
+        if (!this.state.daily) {
             return null;
         }
 
