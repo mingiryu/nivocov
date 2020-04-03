@@ -1,5 +1,4 @@
 import React from "react";
-import "./Chart.css";
 import * as d3 from "d3";
 
 import Header from "./Header";
@@ -20,6 +19,8 @@ const DEATHS_FILE = "time_series_covid19_deaths_global.csv";
 const RECOVERED_FILE = "time_series_covid19_recovered_global.csv";
 
 class Chart extends React.Component {
+    static contextType = COVIDContext;
+
     constructor(props) {
         super(props);
 
@@ -92,62 +93,67 @@ class Chart extends React.Component {
         }
 
         return (
-            <div className="two">
-                <BarChart
-                    data={this.state.daily}
-                    updateCountry={this.updateCountry}
-                ></BarChart>
-                <div>
-                    <Header></Header>
-                    <div className="buttonGroup">
-                        <button
-                            onClick={() => this.setState({ type: "Confirmed" })}
-                        >
-                            Confirmed
-                        </button>
-                        <button
-                            onClick={() => this.setState({ type: "Recovered" })}
-                        >
-                            Recovered
-                        </button>
-                        <button
-                            onClick={() => this.setState({ type: "Deaths" })}
-                        >
-                            Deaths
-                        </button>
+            <COVIDContext.Provider
+                value={{
+                    columns: this.state.columns,
+                    confirmed: this.state.confirmed,
+                    deaths: this.state.deaths,
+                    recovered: this.state.recovered,
+                    daily: this.state.daily,
+                    country: this.state.country,
+                    type: this.state.type,
+                    scale: this.state.scale
+                }}
+            >
+                <div className="two">
+                    <BarChart updateCountry={this.updateCountry}></BarChart>
+                    <div>
+                        <Header></Header>
+                        <div className="buttonGroup">
+                            <button
+                                onClick={() =>
+                                    this.setState({ type: "Confirmed" })
+                                }
+                            >
+                                Confirmed
+                            </button>
+                            <button
+                                onClick={() =>
+                                    this.setState({ type: "Recovered" })
+                                }
+                            >
+                                Recovered
+                            </button>
+                            <button
+                                onClick={() =>
+                                    this.setState({ type: "Deaths" })
+                                }
+                            >
+                                Deaths
+                            </button>
+                        </div>
+                        <Choropleth
+                            updateCountry={this.updateCountry}
+                        ></Choropleth>
+                        <div className="buttonGroup">
+                            <button
+                                onClick={() =>
+                                    this.setState({ scale: "linear" })
+                                }
+                            >
+                                Linear
+                            </button>
+                            <button
+                                onClick={() => this.setState({ scale: "log" })}
+                            >
+                                Log
+                            </button>
+                        </div>
+                        <LineChart></LineChart>
+                        <StreamChart></StreamChart>
                     </div>
-                    <Choropleth
-                        data={this.state.daily}
-                        type={this.state.type}
-                        updateCountry={this.updateCountry}
-                    ></Choropleth>
-                    <div className="buttonGroup">
-                        <button
-                            onClick={() => this.setState({ scale: "linear" })}
-                        >
-                            Linear
-                        </button>
-                        <button onClick={() => this.setState({ scale: "log" })}>
-                            Log
-                        </button>
-                    </div>
-                    <LineChart
-                        confirmed={this.state.confirmed}
-                        recovered={this.state.recovered}
-                        deaths={this.state.deaths}
-                        columns={this.state.columns}
-                        country={this.state.country}
-                        scale={this.state.scale}
-                    ></LineChart>
-                    <StreamChart
-                        confirmed={this.state.confirmed}
-                        recovered={this.state.recovered}
-                        deaths={this.state.deaths}
-                        columns={this.state.columns}
-                        country={this.state.country}
-                    ></StreamChart>
                 </div>
-            </div>
+            </COVIDContext.Provider>
         );
     }
 }

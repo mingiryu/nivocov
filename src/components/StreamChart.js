@@ -1,77 +1,87 @@
 import React from "react";
 import { ResponsiveStream } from "@nivo/stream";
 import toISO from "./toISO";
+import COVIDContext from "./COVIDContext";
 
 class StreamChart extends React.Component {
-    constructor(props) {
+    static contextType = COVIDContext;
+
+    constructor(props, context) {
         super(props);
 
         this.state = {
-            confirmed: this.props.confirmed,
-            recovered: this.props.recovered,
-            deaths: this.props.deaths,
-            dates: this.props.columns.slice(4, this.props.columns.length)
-        }
+            dates: context.columns.slice(4, context.columns.length),
+            confirmed: context.confirmed,
+            recovered: context.recovered,
+            deaths: context.deaths
+        };
     }
 
-    parseData() {
-        const target = toISO[this.props.country]
+    parseData(dates, country, _confirmed, _deaths, _recovered) {
+        const target = toISO[country];
 
         // Get aggregated data
-        const confirmed = this.aggData(target, this.state.confirmed)
-        const recovered = this.aggData(target, this.state.recovered)
-        const deaths = this.aggData(target, this.state.deaths)
+        const confirmed = this.aggData(dates, target, _confirmed);
+        const recovered = this.aggData(dates, target, _recovered);
+        const deaths = this.aggData(dates, target, _deaths);
 
-        let data = []
-        let caseFound = false
+        let data = [];
+        let caseFound = false;
 
         // Drop dates before the first case
-        for (var i = 0; i < this.state.dates.length - 1; i++) {
+        for (var i = 0; i < dates.length - 1; i++) {
             if (confirmed[i] || recovered[i] || deaths[i]) {
-                caseFound = true
+                caseFound = true;
             }
 
             if (caseFound) {
                 data.push({
-                    "Confirmed": confirmed[i],
-                    "Recovered": recovered[i],
-                    "Deaths": deaths[i]
-                })
+                    Confirmed: confirmed[i],
+                    Recovered: recovered[i],
+                    Deaths: deaths[i]
+                });
             }
         }
 
-        return data
+        return data;
     }
 
-    aggData(target, data) {
+    aggData(dates, target, data) {
         // Allocate data structure
-        let agg = this.state.dates.map(() => 0)
+        let agg = dates.map(() => 0);
 
         // Find matches and sum it up
         data.forEach(d => {
-            const country = toISO[d["Country/Region"]]
+            const country = toISO[d["Country/Region"]];
 
             if (country === target) {
                 for (var i = 0; i < agg.length; i++) {
-                    agg[i] += +d[this.state.dates[i]]
+                    agg[i] += +d[dates[i]];
                 }
             }
-        })
+        });
 
         // Get daily counts
         for (var i = agg.length - 1; i > 0; i--) {
-            agg[i] -= agg[i - 1]
+            agg[i] -= agg[i - 1];
         }
-        return agg
+        return agg;
     }
 
     render() {
+        const data = this.parseData(
+            this.state.dates,
+            this.context.country,
+            this.state.confirmed,
+            this.state.deaths,
+            this.state.recovered
+        );
         return (
             <div className="chart">
                 <hr></hr>
                 <span>Trends</span>
                 <ResponsiveStream
-                    data={this.parseData()}
+                    data={data}
                     keys={["Deaths", "Recovered", "Confirmed"]}
                     margin={{ top: 10, right: 30, bottom: 80, left: 90 }}
                     axisTop={null}
@@ -83,7 +93,7 @@ class StreamChart extends React.Component {
                         tickRotation: -90,
                         legend: "Days Since the First Case",
                         legendPosition: "middle",
-                        legendOffset: 46,
+                        legendOffset: 46
                     }}
                     axisLeft={{
                         orient: "left",
@@ -101,7 +111,10 @@ class StreamChart extends React.Component {
                     dotSize={8}
                     dotColor={{ from: "color" }}
                     dotBorderWidth={2}
-                    dotBorderColor={{ from: "color", modifiers: [["darker", 0.7]] }}
+                    dotBorderColor={{
+                        from: "color",
+                        modifiers: [["darker", 0.7]]
+                    }}
                     animate={true}
                     motionStiffness={50}
                     motionDamping={15}
@@ -131,4 +144,4 @@ class StreamChart extends React.Component {
         );
     }
 }
-export default StreamChart
+export default StreamChart;
