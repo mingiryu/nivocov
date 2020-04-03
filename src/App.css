@@ -1,8 +1,96 @@
 :root {
-  --primary-color: lightslategray;
-  --primary-color-dark: slategray;
+    --primary-color: lightgray;
+    --primary-color-dark: gray;
 }
 
 .App {
-  margin: 0 5vw;
+    margin: 0 5vw;
+}
+
+h1 {
+    font-weight: normal;
+    margin: 0.5em 0;
+}
+
+p {
+    color: var(--primary-color-dark);
+}
+
+a {
+    text-decoration: none;
+    color: royalblue;
+}
+
+.two {
+    display: grid;
+    grid-template-columns: auto auto;
+    margin-top: 1em;
+}
+
+.buttonGroup {
+    display: grid;
+    position: absolute;
+    grid-template-columns: auto;
+    margin-top: 3em;
+    z-index: 1;
+}
+
+.bar {
+    display: block;
+    width: 35vw;
+    min-height: 1050px;
+    height: 170vh;
+}
+
+.map {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    min-height: 300px;
+    height: 50vh;
+    margin: 1em 0;
+    padding-bottom: 2em;
+}
+
+.chart {
+    display: block;
+    width: auto;
+    max-width: 100%;
+    min-height: 300px;
+    height: 50vh;
+    margin: 0.5em;
+}
+
+button {
+    padding: 0.5em;
+    margin: 0.5em;
+    border-width: 1px;
+    border-style: solid;
+    border-color: black;
+    background: white;
+    border-radius: 3px;
+    box-shadow: 1px 1px 1px var(--primary-color-dark);
+    text-align: center;
+}
+
+button:hover {
+    background: var(--primary-color);
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+@media screen and (max-width: 1000px) {
+    .bar {
+        display: none;
+    }
+
+    .map {
+        max-width: 100%;
+    }
+
+    .chart {
+        max-width: 100;
+    }
 }
