@@ -7,10 +7,10 @@ import COVIDContext from "./COVIDContext";
 class Choropleth extends React.Component {
     static contextType = COVIDContext;
 
-    constructor(props) {
+    constructor(props, context) {
         super(props);
 
-        this.state = { data: null };
+        this.state = { daily: context.daily };
     }
 
     parseData(data) {
@@ -44,10 +44,6 @@ class Choropleth extends React.Component {
         this.props.updateCountry(data.data.name);
     }
 
-    componentDidMount() {
-        this.setState({ data: this.parseData(this.context.daily) });
-    }
-
     render() {
         let max;
         if (this.context.type === "Confirmed") {
@@ -58,12 +54,14 @@ class Choropleth extends React.Component {
             max = 5000;
         }
 
+        const data = this.parseData(this.state.daily) 
+
         return (
             <div className="map">
                 <hr></hr>
                 <span>Worldwide</span>
                 <ResponsiveChoropleth
-                    data={this.state.data}
+                    data={data}
                     features={Countries.features}
                     margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
                     colors="YlGnBu"
