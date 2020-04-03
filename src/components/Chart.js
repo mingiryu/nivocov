@@ -7,7 +7,10 @@ import BarChart from "./BarChart";
 import Choropleth from "./Choropleth";
 import LineChart from "./LineChart";
 import StreamChart from "./StreamChart";
+import COVIDContext from "./COVIDContext";
 
+const DAILY_GET_API =
+    "https://api.github.com/repos/CSSEGISandData/COVID-19/git/trees/d3fd355cb4008681bf8384bbf6fa72a1bea7723f";
 const BASE_RAW_URL =
     "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/";
 const TIMESERIES_DIR = "csse_covid_19_time_series/";
@@ -15,19 +18,6 @@ const DAILY_DIR = "csse_covid_19_daily_reports/";
 const CONFIRMED_FILE = "time_series_covid19_confirmed_global.csv";
 const DEATHS_FILE = "time_series_covid19_deaths_global.csv";
 const RECOVERED_FILE = "time_series_covid19_recovered_global.csv";
-
-const BASE_URL =
-    "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_time_series/";
-const CONFIRMED_URL = BASE_URL + "time_series_covid19_confirmed_global.csv";
-const DEATHS_URL = BASE_URL + "time_series_covid19_deaths_global.csv";
-const RECOVERED_URL = BASE_URL + "time_series_covid19_recovered_global.csv";
-const DAILY_RAW_URL =
-    "https://raw.githubusercontent.com/CSSEGISandData/COVID-19/master/csse_covid_19_data/csse_covid_19_daily_reports/";
-const DAILY_GET_API =
-    "https://api.github.com/repos/CSSEGISandData/COVID-19/git/trees/d3fd355cb4008681bf8384bbf6fa72a1bea7723f";
-const DAILY_URL = DAILY_RAW_URL;
-
-let TODAY = new Date();
 
 class Chart extends React.Component {
     constructor(props) {
@@ -43,20 +33,11 @@ class Chart extends React.Component {
             type: "Confirmed",
             scale: "linear"
         };
-
     }
 
     updateCountry = name => {
         this.setState({ country: name });
     };
-
-    getDailyUrl() {
-        return `${DAILY_URL}${("0" + (TODAY.getMonth() + 1)).slice(-2) +
-            "-" +
-            ("0" + TODAY.getDate()).slice(-2) +
-            "-" +
-            TODAY.getFullYear()}${".csv"}`;
-    }
 
     /* getDailyPath: a robust method to get the filename of the latest daily report.
      *
@@ -79,22 +60,25 @@ class Chart extends React.Component {
     }
 
     fetchData() {
-        d3.csv(CONFIRMED_URL).then(d =>
+        d3.csv(`${BASE_RAW_URL}${TIMESERIES_DIR}${CONFIRMED_FILE}`).then(d =>
             this.setState({
                 confirmed: d,
                 columns: d.columns
             })
         );
-        d3.csv(DEATHS_URL).then(d => this.setState({ deaths: d }));
-        d3.csv(RECOVERED_URL).then(d => this.setState({ recovered: d }));
+        d3.csv(`${BASE_RAW_URL}${TIMESERIES_DIR}${DEATHS_FILE}`).then(d =>
+            this.setState({ deaths: d })
+        );
+        d3.csv(`${BASE_RAW_URL}${TIMESERIES_DIR}${RECOVERED_FILE}`).then(d =>
+            this.setState({ recovered: d })
+        );
     }
 
     componentDidMount() {
         this.getDailyPath()
             .then(path => d3.csv(path))
-            .then(csv => this.setState({ daily: csv}));
+            .then(csv => this.setState({ daily: csv }));
         this.fetchData();
-
     }
 
     render() {
